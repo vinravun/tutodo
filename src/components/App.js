@@ -23,14 +23,20 @@ class App extends React.Component {
     e.currentTarget.reset();
   };
 
+  deleteTodo = (key) => {
+    const { todos } = this.state;
+    delete todos[key];
+    this.setState({ todos });
+  };
+
   render() {
     return (
       <div className="todo">
         <form className="todo__input" onSubmit={this.addNewTodo}>
-          <input type="text" placeholder="whajyu gotta do" ref={this.inputRef} required />
+          <input type="text" placeholder="whajyu gotta do?" ref={this.inputRef} required />
           <button type="submit">+</button>
         </form>
-        <TodoList todos={this.state.todos} />
+        <TodoList todos={this.state.todos} deleteTodo={this.deleteTodo} />
       </div>
     );
   }

@@ -16,6 +16,18 @@ body {
     font-family: 'Architects Daughter', cursive;
 }
 
+input, button {
+    border: none;
+    font: inherit;
+    &:focus {
+        outline: none;
+    }
+}
+
+button {
+    cursor: pointer;
+}
+
 .todo {
     min-width: 400px;
     padding: 2rem 1rem;
@@ -27,14 +39,6 @@ body {
     &__input {
         display: flex;
         align-items: center;
-
-        input, button {
-            border: none;
-            font: inherit;
-            &:focus {
-                outline: none;
-            }
-        }
         
         input {
             width: calc(100% - var(--add-button-size));
@@ -52,7 +56,6 @@ body {
             background-color: transparent;
             border-radius: 50%;
             font-size: 2rem;
-            cursor: pointer;
         }
     }
 
@@ -67,13 +70,21 @@ body {
         li {
             padding: 10px;
             font-size: 18px;
-            border-radius: 12px;
+            border-radius: 6px;
             transform: .3s;
+            position: relative;
 
             &:hover {
                 cursor: pointer;
                 background-color: #fff;
                 opacity: .7;
+            }
+
+            button {
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                transform: translateY(-50%);
             }
         }
     }
