@@ -12,13 +12,16 @@ body {
     height: 100vh;
     background-color: var(--bg-color);
     display: grid;
-    place-items: center;
+    justify-content: center;
+    padding: 10rem 2rem 0;
     font-family: 'Architects Daughter', cursive;
 }
 
 input, button {
     border: none;
     font: inherit;
+    background-color: transparent;
+
     &:focus {
         outline: none;
     }
@@ -44,7 +47,6 @@ button {
             width: calc(100% - var(--add-button-size));
             padding: 10px;
             font-size: 20px;
-            background-color: transparent;
             border-bottom: 2px solid var(--primary-color);
         }
 
@@ -53,7 +55,6 @@ button {
             padding: 0;
             padding-left: 10px;
             color: var(--primary-color);
-            background-color: transparent;
             border-radius: 50%;
             font-size: 2rem;
         }
@@ -71,20 +72,40 @@ button {
             padding: 10px;
             font-size: 18px;
             border-radius: 6px;
-            transform: .3s;
+            overflow-x: hidden;
+            transition: .3s;
             position: relative;
 
-            &:hover {
-                cursor: pointer;
-                background-color: #fff;
-                opacity: .7;
+            &::after {
+                content: '';
+                width: 50px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                border-bottom: 1px solid #aaa;
             }
 
             button {
                 position: absolute;
                 top: 50%;
-                right: 10px;
-                transform: translateY(-50%);
+                right: 0;
+                transform: translateY(-50%) rotate(0);
+                font-size: 1.25rem;
+                transition: .3s;
+
+                &:hover {
+                    transform: translateY(-50%) rotate(180deg);
+                }
+            }
+
+            &:hover {
+                cursor: pointer;
+                background-color: #fff;
+                opacity: .7;
+
+                &::after {
+                    border-bottom: none;
+                }
             }
         }
     }

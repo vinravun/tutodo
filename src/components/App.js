@@ -7,18 +7,24 @@ class App extends React.Component {
     todos: {},
   };
 
-  inputRef = React.createRef();
+  todoInputRef = React.createRef();
+
+  componentDidMount() {
+    const localStorageRef = localStorage.getItem('todos');
+    if (localStorageRef) {
+      this.setState({ todos: JSON.parse(localStorageRef) });
+    }
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('todos', JSON.stringify(this.state.todos));
+  }
 
   addNewTodo = (e) => {
     e.preventDefault();
-    const newTodo = this.inputRef.current.value;
-    // a copy of the existing state
+    const newTodo = this.todoInputRef.current.value;
     const { todos } = this.state;
-    // eslint-disable-next-line no-console
-    console.log(todos);
-    // add new todo to todos variable
     todos[`todo${Date.now()}`] = newTodo;
-    // set new todos object to state
     this.setState({ todos });
     e.currentTarget.reset();
   };
@@ -33,7 +39,7 @@ class App extends React.Component {
     return (
       <div className="todo">
         <form className="todo__input" onSubmit={this.addNewTodo}>
-          <input type="text" placeholder="whajyu gotta do?" ref={this.inputRef} required />
+          <input type="text" placeholder="whajyu gotta do?" ref={this.todoInputRef} required />
           <button type="submit">+</button>
         </form>
         <TodoList todos={this.state.todos} deleteTodo={this.deleteTodo} />
