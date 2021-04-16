@@ -22,11 +22,21 @@ class App extends React.Component {
 
   addNewTodo = (e) => {
     e.preventDefault();
-    const newTodo = this.todoInputRef.current.value;
+    const newTodo = {
+      text: this.todoInputRef.current.value,
+      complete: false,
+    };
     const { todos } = this.state;
     todos[`todo${Date.now()}`] = newTodo;
     this.setState({ todos });
     e.currentTarget.reset();
+  };
+
+  toggleComplete = (key) => {
+    const { todos } = this.state;
+    todos[key].complete = !todos[key].complete;
+    console.log(todos);
+    this.setState({ todos });
   };
 
   deleteTodo = (key) => {
@@ -42,7 +52,7 @@ class App extends React.Component {
           <input type="text" placeholder="whajyu gotta do?" ref={this.todoInputRef} required />
           <button type="submit">+</button>
         </form>
-        <TodoList todos={this.state.todos} deleteTodo={this.deleteTodo} />
+        <TodoList todos={this.state.todos} toggleComplete={this.toggleComplete} deleteTodo={this.deleteTodo} />
       </div>
     );
   }

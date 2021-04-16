@@ -17,7 +17,17 @@ body {
     font-family: 'Architects Daughter', cursive;
 }
 
-input, button {
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 20px;
+}
+
+input,
+button {
     border: none;
     font: inherit;
     background-color: transparent;
@@ -36,13 +46,13 @@ button {
     padding: 2rem 1rem;
     background-color: var(--bg-color);
     border-radius: 1rem;
-    box-shadow:  20px 20px 60px #abb8c2,
-             -20px -20px 60px #e7f8ff;
+    box-shadow: 20px 20px 60px #abb8c2,
+        -20px -20px 60px #e7f8ff;
 
     &__input {
         display: flex;
         align-items: center;
-        
+
         input {
             width: calc(100% - var(--add-button-size));
             padding: 10px;
@@ -65,36 +75,53 @@ button {
         padding: 0;
         padding-top: 10px;
         list-style-type: none;
-        max-height: 200px;
-        overflow-y: auto;
+        // max-height: 200px;
+        // overflow-y: auto;
 
         li {
             padding: 10px;
             font-size: 18px;
             border-radius: 6px;
-            overflow-x: hidden;
             transition: .3s;
             position: relative;
+
+            &:not(:last-child) {
+                // margin-bottom: 10px;
+            }
 
             &::after {
                 content: '';
                 width: 50px;
                 position: absolute;
-                bottom: 0;
-                left: 0;
+                bottom: -1px;
+                left: 6px;
                 border-bottom: 1px solid #aaa;
+                transition: .2s ease-out;
             }
 
-            button {
+            &.completed-task {
+                text-decoration: line-through;
+                text-decoration-thickness: 2px;
+            }
+
+            input[type="checkbox"] {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                opacity: 0;
+            }
+
+            .button-group {
                 position: absolute;
                 top: 50%;
                 right: 0;
-                transform: translateY(-50%) rotate(0);
-                font-size: 1.25rem;
-                transition: .3s;
+                transform: translateY(-50%);
 
-                &:hover {
-                    transform: translateY(-50%) rotate(180deg);
+                button {
+                    font-size: 1.75rem;
                 }
             }
 
@@ -104,7 +131,7 @@ button {
                 opacity: .7;
 
                 &::after {
-                    border-bottom: none;
+                    width: 100px;
                 }
             }
         }

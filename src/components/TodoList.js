@@ -7,7 +7,14 @@ class TodoList extends React.Component {
     return (
       <ul className="todo__list">
         {Object.keys(this.props.todos).map((key) => (
-          <TodoItem key={key} index={key} text={this.props.todos[key]} deleteTodo={this.props.deleteTodo} />
+          <TodoItem
+            key={key}
+            index={key}
+            text={this.props.todos[key].text}
+            complete={this.props.todos[key].complete}
+            toggleComplete={this.props.toggleComplete}
+            deleteTodo={this.props.deleteTodo}
+          />
         ))}
       </ul>
     );
@@ -16,6 +23,7 @@ class TodoList extends React.Component {
 
 TodoList.propTypes = {
   todos: PropTypes.object,
+  toggleComplete: PropTypes.func,
   deleteTodo: PropTypes.func,
 };
 
